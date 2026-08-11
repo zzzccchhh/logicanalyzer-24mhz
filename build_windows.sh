@@ -158,18 +158,22 @@ if [ -z "$WINDEPLOYQT" ]; then
 fi
 echo "windeployqt 正在部署 Qt5 运行库 ($WINDEPLOYQT)..."
 export QTDIR="/mingw64"
-# windeployqt 可能因跳过可选插件（如 virtualkeyboard 缺 Qt5Qml）返回非零退出码，
+# windeployqt 可能因跳过可选插件（如 virtualkeyboard 缺 Qt5Qml/Qt5Quick）返回非零退出码，
 # 但只要关键运行库产出即视为成功，故不检查退出码，改为校验产物。
-"$WINDEPLOYQT" --release --no-translations --no-system-d3d-compiler \
-    --no-opengl-sw "$PVDIR/LogicAnalyzer.exe" \
+# 显式 --dir 指定输出目录，避免默认行为差异；只保留最可靠的参数。
+"$WINDEPLOYQT" --release --no-translations --dir "$PVDIR" \
+    "$PVDIR/LogicAnalyzer.exe" \
     > "$PVDIR/windeployqt.log" 2>&1 || true
 echo "windeployqt 完成，插件目录: $(ls -d "$PVDIR"/platforms "$PVDIR"/imageformats "$PVDIR"/iconengines "$PVDIR"/styles 2>/dev/null | tr '\n' ' ')"
+echo "windeployqt 部署的 Qt DLL: $(ls "$PVDIR"/Qt5*.dll 2>/dev/null | tr '\n' ' ')"
 if [ ! -f "$PVDIR/platforms/qwindows.dll" ] || [ ! -f "$PVDIR/Qt5Core.dll" ]; then
     echo "[错误] windeployqt 未产出关键 Qt 运行库（platforms/qwindows.dll 或 Qt5Core.dll）"
+    # 通过 ::error:: 输出诊断信息到 CI annotations（可远程读取）
     while IFS= read -r line; do
         echo "::error file=windeployqt.log::$line"
     done < "$PVDIR/windeployqt.log"
-    cat "$PVDIR/windeployqt.log" 2>/dev/null | tail -n 40
+    echo "::error::PVDIR contents:"
+    ls -la "$PVDIR" 2>/dev/null | while IFS= read -r line; do echo "::error::$line"; done
     exit 1
 fi
 
