@@ -184,25 +184,36 @@ if command -v makensis >/dev/null 2>&1; then
 	SETUP_NAME="LogicAnalyzer-setup-${PV_VERSION_STRING}.exe"
 	NSIS_SCRIPT="$PVDIR/logicanalyzer.nsi"
 
-	sed -e "s|@OUTFILE@|${SETUP_NAME}|" \
-	    -e "s|@PVDIR@|${PVDIR}|g" \
-	    -e "s|@PROJECT_SOURCE_DIR@|${SCRIPT_DIR}|g" \
-	    -e "s|@PV_VERSION_STRING@|${PV_VERSION_STRING}|g" \
-	    "$SCRIPT_DIR/contrib/logicanalyzer.nsi.in" > "$NSIS_SCRIPT"
+	# 用 Python 生成 NSIS 脚本，避免 sed 在 Windows
+	# 反斜杠路径上的转义问题。路径统一转正斜杠。
+	python - "$SCRIPT_DIR" "$PVDIR" "$SETUP_NAME" "$PV_VERSION_STRING" "$NSIS_SCRIPT" <<'NSISP'
+import sys
+script_dir, pvdir, setup_name, ver, out_script = sys.argv[1:6]
+def fwd(p):
+    return p.replace('\\', '/')
+src = open(fwd(script_dir) + '/contrib/logicanalyzer.nsi.in', encoding='utf-8').read()
+src = src.replace('@OUTFILE@', setup_name)
+src = src.replace('@PVDIR@', fwd(pvdir))
+src = src.replace('@PROJECT_SOURCE_DIR@', fwd(script_dir))
+src = src.replace('@PV_VERSION_STRING@', ver)
+open(out_script, 'w', encoding='utf-8', newline='\n').write(src)
+print("Generated NSIS script: " + out_script)
+NSISP
 
-	if makensis "$NSIS_SCRIPT" > /dev/null; then
-		mv "$PVDIR/$SETUP_NAME" "$SCRIPT_DIR/build/$SETUP_NAME"
-		echo "[OK] 安装向导: $SCRIPT_DIR/build/$SETUP_NAME"
-	else
-		echo "[警告] NSIS 打包失败，跳过安装向导（仍可使用免安装 zip）"
+	if ! makensis "$NSIS_SCRIPT" > /dev/null; then
+		echo "[错误] NSIS 打包失败！"
+		exit 1
 	fi
+	mv "$PVDIR/$SETUP_NAME" "$SCRIPT_DIR/build/$SETUP_NAME"
+	echo "[OK] 安装向导: $SCRIPT_DIR/build/$SETUP_NAME"
 else
-	echo "[警告] 未找到 makensis（mingw-w64-x86_64-nsis），跳过安装向导（仍可使用免安装 zip）"
+	echo "[错误] 未找到 makensis（mingw-w64-x86_64-nsis）"
+	exit 1
 fi
 
 echo ""
 echo "============================================"
 echo " 构建完成: $PVDIR/LogicAnalyzer.exe"
 echo " 免安装包: $SCRIPT_DIR/build/LogicAnalyzer-win64.zip"
-echo " 安装向导: $SCRIPT_DIR/build/LogicAnalyzer-setup-${PV_VERSION_STRING}.exe (若 NSIS 可用)"
+echo " 安装向导: $SCRIPT_DIR/build/LogicAnalyzer-setup-${PV_VERSION_STRING}.exe"
 echo "============================================"
