@@ -150,14 +150,22 @@ done
 # 用 windeployqt 自动部署 Qt5 运行库与插件
 # （Qt5Core/Gui/Widgets/Svg.dll、platforms/qwindows.dll、
 #  imageformats/、iconengines/、styles/ 等），使安装版与免安装版自包含。
-if command -v windeployqt >/dev/null 2>&1; then
-    echo "windeployqt 正在部署 Qt5 运行库..."
-    windeployqt --release --no-translations --no-system-d3d-compiler \
-        --no-opengl-sw "$PVDIR/LogicAnalyzer.exe" || \
-        echo "[警告] windeployqt 部署 Qt5 运行库失败，Qt 依赖可能缺失"
-else
-    echo "[警告] 未找到 windeployqt，Qt5 运行库未部署，安装包可能无法启动"
+# MSYS2 的 qt5-tools 将 windeployqt 重命名为 windeployqt-qt5（避免与 qt6 冲突）。
+WINDEPLOYQT="$(command -v windeployqt-qt5 || command -v windeployqt || true)"
+if [ -z "$WINDEPLOYQT" ]; then
+    echo "[错误] 未找到 windeployqt(-qt5)（需安装 mingw-w64-x86_64-qt5-tools）"
+    exit 1
 fi
+echo "windeployqt 正在部署 Qt5 运行库 ($WINDEPLOYQT)..."
+export QTDIR="/mingw64"
+if ! "$WINDEPLOYQT" --release --no-translations --no-system-d3d-compiler \
+    --no-opengl-sw "$PVDIR/LogicAnalyzer.exe" \
+    > "$PVDIR/windeployqt.log" 2>&1; then
+    echo "[错误] windeployqt 部署 Qt5 失败，见 $PVDIR/windeployqt.log"
+    cat "$PVDIR/windeployqt.log" 2>/dev/null | tail -n 40
+    exit 1
+fi
+echo "windeployqt 完成，插件目录: $(ls -d "$PVDIR"/platforms "$PVDIR"/imageformats "$PVDIR"/iconengines "$PVDIR"/styles 2>/dev/null | tr '\n' ' ')"
 
 cp -R "$PREFIX/share/libsigrokdecode/decoders" "$PVDIR/decoders"
 

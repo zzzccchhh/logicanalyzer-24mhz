@@ -106,6 +106,8 @@ Section "U3LogicAnalyzer (required)"
 	File "*.dll"
 
 	# Qt5 runtime plugins deployed by windeployqt.
+	# These dirs must exist (build_windows.sh fails the build if
+	# windeployqt did not produce them), so plain File /r is safe here.
 	File /r "platforms"
 	File /r "imageformats"
 	File /r "iconengines"
