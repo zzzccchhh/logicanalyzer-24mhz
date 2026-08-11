@@ -101,6 +101,7 @@ Linux / Windows on push to master and pull requests. Pushing a `v*` tag
 - `U3LogicAnalyzer.dmg` (macOS installer image)
 - `U3LogicAnalyzer-linux.tar.gz` (Linux binary + decoders; needs system Qt5/glib)
 - `LogicAnalyzer-win64.zip` (Windows portable package)
+- `LogicAnalyzer-setup-<version>.exe` (Windows NSIS installer wizard)
 
 ## Known limitations
 

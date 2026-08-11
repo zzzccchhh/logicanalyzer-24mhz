@@ -49,6 +49,7 @@ jobs:
             mingw-w64-x86_64-boost
             mingw-w64-x86_64-qt5
             mingw-w64-x86_64-python
+            mingw-w64-x86_64-nsis
             zip
 
       - name: Install macOS dependencies
@@ -104,6 +105,7 @@ jobs:
             build/U3LogicAnalyzer.dmg
             build/U3LogicAnalyzer-linux.tar.gz
             build/LogicAnalyzer-win64.zip
+            build/LogicAnalyzer-setup-*.exe
           if-no-files-found: warn
 
       - name: Publish release (on tag)
@@ -114,4 +116,5 @@ jobs:
             build/U3LogicAnalyzer.dmg
             build/U3LogicAnalyzer-linux.tar.gz
             build/LogicAnalyzer-win64.zip
+            build/LogicAnalyzer-setup-*.exe
           generate_release_notes: true

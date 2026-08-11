@@ -138,6 +138,7 @@ cd build_cmake/logicanalyzer_build && ./LogicAnalyzer.exe   # 运行
   - `U3LogicAnalyzer.dmg`（macOS 安装镜像，拖拽安装）
   - `U3LogicAnalyzer-linux.tar.gz`（Linux 二进制 + 解码器，需系统 Qt5/glib 等依赖）
   - `LogicAnalyzer-win64.zip`（Windows 免安装包：exe + DLL + 解码器 + run.bat）
+  - `LogicAnalyzer-setup-<版本>.exe`（Windows 安装向导包：NSIS 安装/卸载、开始菜单）
 
 ## 已知限制
 

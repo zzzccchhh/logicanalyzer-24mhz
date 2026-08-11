@@ -6,9 +6,11 @@
 #   pacman -S --needed --noconfirm \
 #       mingw-w64-x86_64-{gcc,cmake,ninja,pkgconf,gdb} \
 #       mingw-w64-x86_64-{glib2,glibmm,libusb,hidapi,libzip} \
-#       mingw-w64-x86_64-{boost,qt5,python,zip}
+#       mingw-w64-x86_64-{boost,qt5,python,zip} \
+#       mingw-w64-x86_64-nsis
 #
-# 产物: build/LogicAnalyzer-win64.zip
+# 产物: build/LogicAnalyzer-win64.zip (免安装包)
+#       build/LogicAnalyzer-setup-<version>.exe (NSIS 安装向导)
 #
 # 源码获取: libsigrok / libsigrokdecode 随仓库分发（仓库内置）。
 # 若目录缺失，解析顺序: 环境变量显式指定 → 仓库内目录 → 上一级目录 →
@@ -166,8 +168,41 @@ cd "$PVDIR"
 rm -f "$SCRIPT_DIR/build/LogicAnalyzer-win64.zip"
 zip -r "$SCRIPT_DIR/build/LogicAnalyzer-win64.zip" . > /dev/null
 
+# ============================================================================
+# 打包 NSIS 安装向导 (LogicAnalyzer-setup-<version>.exe)
+# ============================================================================
+echo ""
+echo "===== 打包 NSIS 安装向导 ====="
+if command -v makensis >/dev/null 2>&1; then
+	# 从 config.h 读取版本号（如 0.5.0）
+	PV_VERSION_STRING="0.5.0"
+	if [ -f "$PVDIR/config.h" ]; then
+		PV_VERSION_STRING=$(sed -n 's/^#define PV_VERSION_STRING "\(.*\)"/\1/p' "$PVDIR/config.h" | head -n1)
+		[ -z "$PV_VERSION_STRING" ] && PV_VERSION_STRING="0.5.0"
+	fi
+
+	SETUP_NAME="LogicAnalyzer-setup-${PV_VERSION_STRING}.exe"
+	NSIS_SCRIPT="$PVDIR/logicanalyzer.nsi"
+
+	sed -e "s|@OUTFILE@|${SETUP_NAME}|" \
+	    -e "s|@PVDIR@|${PVDIR}|g" \
+	    -e "s|@PROJECT_SOURCE_DIR@|${SCRIPT_DIR}|g" \
+	    -e "s|@PV_VERSION_STRING@|${PV_VERSION_STRING}|g" \
+	    "$SCRIPT_DIR/contrib/logicanalyzer.nsi.in" > "$NSIS_SCRIPT"
+
+	if makensis "$NSIS_SCRIPT" > /dev/null; then
+		mv "$PVDIR/$SETUP_NAME" "$SCRIPT_DIR/build/$SETUP_NAME"
+		echo "[OK] 安装向导: $SCRIPT_DIR/build/$SETUP_NAME"
+	else
+		echo "[警告] NSIS 打包失败，跳过安装向导（仍可使用免安装 zip）"
+	fi
+else
+	echo "[警告] 未找到 makensis（mingw-w64-x86_64-nsis），跳过安装向导（仍可使用免安装 zip）"
+fi
+
 echo ""
 echo "============================================"
 echo " 构建完成: $PVDIR/LogicAnalyzer.exe"
-echo " 安装包:   $SCRIPT_DIR/build/LogicAnalyzer-win64.zip"
+echo " 免安装包: $SCRIPT_DIR/build/LogicAnalyzer-win64.zip"
+echo " 安装向导: $SCRIPT_DIR/build/LogicAnalyzer-setup-${PV_VERSION_STRING}.exe (若 NSIS 可用)"
 echo "============================================"
