@@ -9,7 +9,7 @@ analyzer, based on PulseView 0.5.0 with a trimmed sigrok stack
 
 ## Features
 
-- CH32H417 (USB 3.0, up to 200 MHz sampling) and CH569 hot-plug detection
+-   CH32H417 (USB 3.0, up to 192 MHz sampling, 24 MHz crystal) and CH569 hot-plug detection
   - Windows: CH375 driver mode (CH375DLL)
   - macOS / Linux: libusb transport inside the driver, no kernel module
     required (protocol based on WCH's official CH37X_LINUX SDK)

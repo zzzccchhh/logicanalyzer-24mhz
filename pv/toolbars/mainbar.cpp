@@ -841,23 +841,23 @@ namespace pv
 
 				if (is_usb2)
 				{
-					// CH32H417 USB2.0: 2/4/8通道最高40MHz，16通道最高20MHz
-					if (maxSampleRate == SR_MHZ(40))
+					// CH32H417 USB2.0: 2/4/8通道最高38.4MHz，16通道最高19.2MHz
+					if (maxSampleRate == SR_MHZ(38.4))
 					{
 						channel_number = 8;
-						sample_rate_channel_max = SR_MHZ(40);
+						sample_rate_channel_max = SR_MHZ(38.4);
 					}
-					else if (maxSampleRate == SR_MHZ(20))
+					else if (maxSampleRate == SR_MHZ(19.2))
 					{
 						channel_number = 16;
-						sample_rate_channel_max = SR_MHZ(20);
+						sample_rate_channel_max = SR_MHZ(19.2);
 					}
 				}
 				else
 				{
-					// CH32H417 USB3.0: 采样率固定200MHz
+					// CH32H417 USB3.0: 采样率固定192MHz
 					channel_number = 16;
-					sample_rate_channel_max = SR_MHZ(200);
+					sample_rate_channel_max = SR_MHZ(192);
 				}
 
 				update_sample_rate_selector();

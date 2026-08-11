@@ -274,17 +274,17 @@ void Channels::init_channel_radios(QVBoxLayout* layout)
 	if (is_ch32h417) {
 		// CH32H417: 根据USB版本显示不同的采样率
 		if (device_mode_ == DeviceMode::CH32H417_USB2_LOGIC) {
-			// C32H417 USB2.0: 2/4/8通道最高40MHz，16通道最高20MHz
-			channel_modes << tr("Use 2 channels (Max 40MHz)");
-			channel_modes << tr("Use 4 channels (Max 40MHz)");
-			channel_modes << tr("Use 8 channels (Max 40MHz)");
-			channel_modes << tr("Use 16 channels (Max 20MHz)");
+			// C32H417 USB2.0: 2/4/8通道最高38.4MHz，16通道最高19.2MHz
+			channel_modes << tr("Use 2 channels (Max 38.4MHz)");
+			channel_modes << tr("Use 4 channels (Max 38.4MHz)");
+			channel_modes << tr("Use 8 channels (Max 38.4MHz)");
+			channel_modes << tr("Use 16 channels (Max 19.2MHz)");
 		} else {
-			// CH32H417 USB3.0: 最高200MHz
-			channel_modes << tr("Use 2 channels (Max 200MHz)");
-			channel_modes << tr("Use 4 channels (Max 200MHz)");
-			channel_modes << tr("Use 8 channels (Max 200MHz)");
-			channel_modes << tr("Use 16 channels (Max 200MHz)");
+			// CH32H417 USB3.0: 最高192MHz
+			channel_modes << tr("Use 2 channels (Max 192MHz)");
+			channel_modes << tr("Use 4 channels (Max 192MHz)");
+			channel_modes << tr("Use 8 channels (Max 192MHz)");
+			channel_modes << tr("Use 16 channels (Max 192MHz)");
 		}
 	} else if (device_mode_ == DeviceMode::CH569_USB3) {
 		// CH569 USB3.0
@@ -584,7 +584,7 @@ void Channels::channelSelect(uint16_t index)
 		break;
 
 	case DeviceMode::CH32H417_USB3_LOGIC:
-		max_sample_rate = SR_MHZ(200);
+		max_sample_rate = SR_MHZ(192);
 		if (index >= 2) {
 			channel_count_change(config.channel_count);
 		} else {
@@ -594,22 +594,22 @@ void Channels::channelSelect(uint16_t index)
 		break;
 
 	case DeviceMode::CH32H417_USB2_LOGIC:
-		// CH32H417 USB2.0: 8通道最高40MHz，16通道最高20MHz
+		// CH32H417 USB2.0: 8通道最高38.4MHz，16通道最高19.2MHz
 		switch (index) {
 		case 0: // 2通道
-			max_sample_rate = SR_MHZ(40);
+			max_sample_rate = SR_MHZ(38.4);
 			channel_count_change(8);  // 硬件实际使用8通道
 			break;
 		case 1: // 4通道
-			max_sample_rate = SR_MHZ(40);
+			max_sample_rate = SR_MHZ(38.4);
 			channel_count_change(8);  // 硬件实际使用8通道
 			break;
 		case 2: // 8通道
-			max_sample_rate = SR_MHZ(40);
+			max_sample_rate = SR_MHZ(38.4);
 			channel_count_change(8);
 			break;
 		case 3: // 16通道
-			max_sample_rate = SR_MHZ(20);
+			max_sample_rate = SR_MHZ(19.2);
 			channel_count_change(16);
 			break;
 		}
@@ -1093,15 +1093,15 @@ void Channels::update_channel_radio_texts()
 
 	if (is_ch32h417) {
 		if (device_mode_ == DeviceMode::CH32H417_USB2_LOGIC) {
-			channel_modes << tr("Use 2 channels (Max 40MHz)");
-			channel_modes << tr("Use 4 channels (Max 40MHz)");
-			channel_modes << tr("Use 8 channels (Max 40MHz)");
-			channel_modes << tr("Use 16 channels (Max 20MHz)");
+			channel_modes << tr("Use 2 channels (Max 38.4MHz)");
+			channel_modes << tr("Use 4 channels (Max 38.4MHz)");
+			channel_modes << tr("Use 8 channels (Max 38.4MHz)");
+			channel_modes << tr("Use 16 channels (Max 19.2MHz)");
 		} else {
-			channel_modes << tr("Use 2 channels (Max 200MHz)");
-			channel_modes << tr("Use 4 channels (Max 200MHz)");
-			channel_modes << tr("Use 8 channels (Max 200MHz)");
-			channel_modes << tr("Use 16 channels (Max 200MHz)");
+			channel_modes << tr("Use 2 channels (Max 192MHz)");
+			channel_modes << tr("Use 4 channels (Max 192MHz)");
+			channel_modes << tr("Use 8 channels (Max 192MHz)");
+			channel_modes << tr("Use 16 channels (Max 192MHz)");
 		}
 	} else if (device_mode_ == DeviceMode::CH569_USB3) {
 		channel_modes << tr("Use 2 channels (Max 1GHz)");

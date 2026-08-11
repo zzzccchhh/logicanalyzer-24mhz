@@ -1579,49 +1579,49 @@ Bei einer Änderung benötigt PulseView eventuell einen Neustart, damit alles ko
     <message>
         <location filename="../pv/popups/channels.cpp" line="308"/>
         <location filename="../pv/popups/channels.cpp" line="1259"/>
-        <source>Use 2 channels (Max 40MHz)</source>
+        <source>Use 2 channels (Max 38.4MHz)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pv/popups/channels.cpp" line="309"/>
         <location filename="../pv/popups/channels.cpp" line="1260"/>
-        <source>Use 4 channels (Max 40MHz)</source>
+        <source>Use 4 channels (Max 38.4MHz)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pv/popups/channels.cpp" line="310"/>
         <location filename="../pv/popups/channels.cpp" line="1261"/>
-        <source>Use 8 channels (Max 40MHz)</source>
+        <source>Use 8 channels (Max 38.4MHz)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pv/popups/channels.cpp" line="311"/>
         <location filename="../pv/popups/channels.cpp" line="1262"/>
-        <source>Use 16 channels (Max 20MHz)</source>
+        <source>Use 16 channels (Max 19.2MHz)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pv/popups/channels.cpp" line="314"/>
         <location filename="../pv/popups/channels.cpp" line="1264"/>
-        <source>Use 2 channels (Max 200MHz)</source>
+        <source>Use 2 channels (Max 192MHz)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pv/popups/channels.cpp" line="315"/>
         <location filename="../pv/popups/channels.cpp" line="1265"/>
-        <source>Use 4 channels (Max 200MHz)</source>
+        <source>Use 4 channels (Max 192MHz)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pv/popups/channels.cpp" line="316"/>
         <location filename="../pv/popups/channels.cpp" line="1266"/>
-        <source>Use 8 channels (Max 200MHz)</source>
+        <source>Use 8 channels (Max 192MHz)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../pv/popups/channels.cpp" line="317"/>
         <location filename="../pv/popups/channels.cpp" line="1267"/>
-        <source>Use 16 channels (Max 200MHz)</source>
+        <source>Use 16 channels (Max 192MHz)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

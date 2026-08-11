@@ -73,43 +73,43 @@ static const int32_t trigger_matches[] = {
 	SR_TRIGGER_EDGE,
 };
 
-/* 逻辑分析仪采样率 - USB 3.0 (最高200MHz) */
+/* 逻辑分析仪采样率 - USB 3.0 (最高192MHz, 24MHz晶振) */
 static const uint64_t logic_samplerates_usb3[] = {
-	SR_MHZ(200),
-	SR_MHZ(187.5),
-	SR_MHZ(175),
-	SR_MHZ(162.5),
-	SR_MHZ(156.25),
+	SR_MHZ(192),
+	SR_MHZ(180),
+	SR_MHZ(168),
+	SR_MHZ(156),
 	SR_MHZ(150),
-	SR_MHZ(137.5),
-	SR_MHZ(125),
-	SR_MHZ(112.5),
-	SR_MHZ(100),
-	SR_MHZ(93.75),
-	SR_MHZ(87.5),
-	SR_MHZ(81.5),
-	SR_MHZ(75.125),
-	SR_MHZ(75),	
-	SR_MHZ(68.75),
+	SR_MHZ(144),
+	SR_MHZ(132),
+	SR_MHZ(120),
+	SR_MHZ(108),
+	SR_MHZ(96),
+	SR_MHZ(90),
+	SR_MHZ(84),
+	SR_MHZ(78),
+	SR_MHZ(72),
+	SR_MHZ(72),
+	SR_MHZ(66),
 };
 
-/* 逻辑分析仪采样率 - USB 2.0 16通道 (最高20MHz) */
+/* 逻辑分析仪采样率 - USB 2.0 16通道 (最高19.2MHz, 24MHz晶振) */
 static const uint64_t logic_samplerates_usb2_16ch[] = {
-	SR_MHZ(20),
+	SR_MHZ(19.2),
 };
 
-/* 逻辑分析仪采样率 - USB 2.0 8通道 (最高40MHz) */
+/* 逻辑分析仪采样率 - USB 2.0 8通道 (最高38.4MHz, 24MHz晶振) */
 static const uint64_t logic_samplerates_usb2_8ch[] = {
-	SR_MHZ(40),
+	SR_MHZ(38.4),
 };
 
-/* ADC采样率 */
+/* ADC采样率 (24MHz晶振) */
 static const uint64_t adc_samplerates[] = {
-	SR_MHZ(20),
-	SR_MHZ(16),
-	SR_MHZ(13.33),
-	SR_MHZ(11.43),
-	SR_MHZ(10),
+	SR_MHZ(19.2),
+	SR_MHZ(15.36),
+	SR_MHZ(12.8),
+	SR_MHZ(10.97),
+	SR_MHZ(9.6),
 };
 
 /* 工作模式名称 */

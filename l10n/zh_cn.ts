@@ -31,36 +31,36 @@
         <translation type="obsolete">使用2通道 (最高 1GHz)</translation>
     </message>
     <message>
-        <source>Use 2 channels (Max 40MHz)</source>
-        <translation type="obsolete">使用2通道 (最高 40MHz)</translation>
+        <source>Use 2 channels (Max 38.4MHz)</source>
+        <translation type="obsolete">使用2通道 (最高 38.4MHz)</translation>
     </message>
     <message>
-        <source>Use 4 channels (Max 40MHz)</source>
-        <translation type="obsolete">使用4通道 (最高 40MHz)</translation>
+        <source>Use 4 channels (Max 38.4MHz)</source>
+        <translation type="obsolete">使用4通道 (最高 38.4MHz)</translation>
     </message>
     <message>
-        <source>Use 8 channels (Max 40MHz)</source>
-        <translation type="obsolete">使用8通道(最高 40MHz)</translation>
+        <source>Use 8 channels (Max 38.4MHz)</source>
+        <translation type="obsolete">使用8通道(最高 38.4MHz)</translation>
     </message>
     <message>
-        <source>Use 16 channels (Max 20MHz)</source>
-        <translation type="obsolete">使用16通道(最高 20MHz)</translation>
+        <source>Use 16 channels (Max 19.2MHz)</source>
+        <translation type="obsolete">使用16通道(最高 19.2MHz)</translation>
     </message>
     <message>
-        <source>Use 2 channels (Max 200MHz)</source>
-        <translation type="obsolete">使用2通道 (最高 200MHz)</translation>
+        <source>Use 2 channels (Max 192MHz)</source>
+        <translation type="obsolete">使用2通道 (最高 192MHz)</translation>
     </message>
     <message>
-        <source>Use 4 channels (Max 200MHz)</source>
-        <translation type="obsolete">使用4通道 (最高 200MHz)</translation>
+        <source>Use 4 channels (Max 192MHz)</source>
+        <translation type="obsolete">使用4通道 (最高 192MHz)</translation>
     </message>
     <message>
-        <source>Use 8 channels (Max 200MHz)</source>
-        <translation type="obsolete">使用8通道 (最高 200MHz)</translation>
+        <source>Use 8 channels (Max 192MHz)</source>
+        <translation type="obsolete">使用8通道 (最高 192MHz)</translation>
     </message>
     <message>
-        <source>Use 16 channels (Max 200MHz)</source>
-        <translation type="obsolete">使用16通道 (最高 200MHz)</translation>
+        <source>Use 16 channels (Max 192MHz)</source>
+        <translation type="obsolete">使用16通道 (最高 192MHz)</translation>
     </message>
     <message>
         <source>Use 4 channels (Max 500MHz)</source>
@@ -1660,14 +1660,14 @@ PulseView可能需要重新启动才能正确显示。</translation>
     <message>
         <location filename="../pv/popups/channels.cpp" line="280"/>
         <location filename="../pv/popups/channels.cpp" line="1087"/>
-        <source>Use 8 channels (Max 40MHz)</source>
-        <translation>使用8通道(最高 40MHz)</translation>
+        <source>Use 8 channels (Max 38.4MHz)</source>
+        <translation>使用8通道(最高 38.4MHz)</translation>
     </message>
     <message>
         <location filename="../pv/popups/channels.cpp" line="281"/>
         <location filename="../pv/popups/channels.cpp" line="1088"/>
-        <source>Use 16 channels (Max 20MHz)</source>
-        <translation>使用16通道(最高 20MHz)</translation>
+        <source>Use 16 channels (Max 19.2MHz)</source>
+        <translation>使用16通道(最高 19.2MHz)</translation>
     </message>
     <message>
         <location filename="../pv/popups/channels.cpp" line="297"/>
@@ -1706,8 +1706,8 @@ PulseView可能需要重新启动才能正确显示。</translation>
     <message>
         <location filename="../pv/popups/channels.cpp" line="284"/>
         <location filename="../pv/popups/channels.cpp" line="1090"/>
-        <source>Use 2 channels (Max 200MHz)</source>
-        <translation type="unfinished">使用2通道 (最高 200MHz)</translation>
+        <source>Use 2 channels (Max 192MHz)</source>
+        <translation type="unfinished">使用2通道 (最高 192MHz)</translation>
     </message>
     <message>
         <source>Use 2 channels (Max 50MHz)</source>
@@ -1728,20 +1728,20 @@ PulseView可能需要重新启动才能正确显示。</translation>
     <message>
         <location filename="../pv/popups/channels.cpp" line="285"/>
         <location filename="../pv/popups/channels.cpp" line="1091"/>
-        <source>Use 4 channels (Max 200MHz)</source>
-        <translation type="unfinished">使用4通道 (最高 200MHz)</translation>
+        <source>Use 4 channels (Max 192MHz)</source>
+        <translation type="unfinished">使用4通道 (最高 192MHz)</translation>
     </message>
     <message>
         <location filename="../pv/popups/channels.cpp" line="286"/>
         <location filename="../pv/popups/channels.cpp" line="1092"/>
-        <source>Use 8 channels (Max 200MHz)</source>
-        <translation type="unfinished">使用8通道 (最高 200MHz)</translation>
+        <source>Use 8 channels (Max 192MHz)</source>
+        <translation type="unfinished">使用8通道 (最高 192MHz)</translation>
     </message>
     <message>
         <location filename="../pv/popups/channels.cpp" line="287"/>
         <location filename="../pv/popups/channels.cpp" line="1093"/>
-        <source>Use 16 channels (Max 200MHz)</source>
-        <translation type="unfinished">使用16通道 (最高 200MHz)</translation>
+        <source>Use 16 channels (Max 192MHz)</source>
+        <translation type="unfinished">使用16通道 (最高 192MHz)</translation>
     </message>
     <message>
         <location filename="../pv/popups/channels.cpp" line="291"/>
@@ -1795,14 +1795,14 @@ PulseView可能需要重新启动才能正确显示。</translation>
     <message>
         <location filename="../pv/popups/channels.cpp" line="278"/>
         <location filename="../pv/popups/channels.cpp" line="1085"/>
-        <source>Use 2 channels (Max 40MHz)</source>
-        <translation>使用2通道 (最高 40MHz)</translation>
+        <source>Use 2 channels (Max 38.4MHz)</source>
+        <translation>使用2通道 (最高 38.4MHz)</translation>
     </message>
     <message>
         <location filename="../pv/popups/channels.cpp" line="279"/>
         <location filename="../pv/popups/channels.cpp" line="1086"/>
-        <source>Use 4 channels (Max 40MHz)</source>
-        <translation>使用4通道 (最高 40MHz)</translation>
+        <source>Use 4 channels (Max 38.4MHz)</source>
+        <translation>使用4通道 (最高 38.4MHz)</translation>
     </message>
 </context>
 <context>

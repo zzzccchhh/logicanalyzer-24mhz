@@ -8,7 +8,7 @@ PulseView 0.5.0 修改，内置裁剪后的 sigrok 软件栈（libsigrok + libsi
 
 ## 功能特性
 
-- **硬件支持**：CH32H417（USB3.0，最高 200MHz 采样）、CH569 热插拔检测
+- **硬件支持**：CH32H417（USB3.0，最高 192MHz 采样，24MHz 晶振）、CH569 热插拔检测
   - Windows：原厂 CH375 驱动模式（CH375DLL）
   - macOS / Linux：驱动内置 **libusb 传输层**，无需任何内核驱动（协议参考
     WCH 官方 CH37X_LINUX SDK）
