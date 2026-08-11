@@ -2424,7 +2424,7 @@ namespace pv
 
 			connect(workerThread, &QThread::started, worker, &pv::dialogs::IAPWorker::do_work);
 			connect(worker, &pv::dialogs::IAPWorker::progress_updated, progressDlg, &QProgressDialog::setValue);
-			connect(worker, &pv::dialogs::IAPWorker::finished, [=](bool success)
+			connect(worker, &pv::dialogs::IAPWorker::finished, this, [=](bool success)
 					{
 				progressDlg->close();
 				if (!success) {
