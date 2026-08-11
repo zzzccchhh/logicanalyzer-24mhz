@@ -147,6 +147,18 @@ for dll in \
     cp "/mingw64/bin/$dll" "$PVDIR/" 2>/dev/null || true
 done
 
+# 用 windeployqt 自动部署 Qt5 运行库与插件
+# （Qt5Core/Gui/Widgets/Svg.dll、platforms/qwindows.dll、
+#  imageformats/、iconengines/、styles/ 等），使安装版与免安装版自包含。
+if command -v windeployqt >/dev/null 2>&1; then
+    echo "windeployqt 正在部署 Qt5 运行库..."
+    windeployqt --release --no-translations --no-system-d3d-compiler \
+        --no-opengl-sw "$PVDIR/LogicAnalyzer.exe" || \
+        echo "[警告] windeployqt 部署 Qt5 运行库失败，Qt 依赖可能缺失"
+else
+    echo "[警告] 未找到 windeployqt，Qt5 运行库未部署，安装包可能无法启动"
+fi
+
 cp -R "$PREFIX/share/libsigrokdecode/decoders" "$PVDIR/decoders"
 
 cat > "$PVDIR/run.bat" << 'RBEOF'

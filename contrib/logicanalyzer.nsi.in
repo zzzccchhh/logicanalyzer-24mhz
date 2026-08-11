@@ -105,6 +105,12 @@ Section "U3LogicAnalyzer (required)"
 	# All runtime DLLs.
 	File "*.dll"
 
+	# Qt5 runtime plugins deployed by windeployqt.
+	File /r "platforms"
+	File /r "imageformats"
+	File /r "iconengines"
+	File /r "styles"
+
 	# run.bat launcher.
 	File "run.bat"
 
@@ -159,6 +165,12 @@ Section "Uninstall"
 
 	# Delete all decoders.
 	RMDir /r "$INSTDIR\decoders"
+
+	# Delete Qt5 runtime plugin directories.
+	RMDir /r "$INSTDIR\platforms"
+	RMDir /r "$INSTDIR\imageformats"
+	RMDir /r "$INSTDIR\iconengines"
+	RMDir /r "$INSTDIR\styles"
 
 	# Delete the install directory.
 	RMDir "$INSTDIR"
