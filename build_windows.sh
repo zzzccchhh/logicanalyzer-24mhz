@@ -200,7 +200,7 @@ open(out_script, 'w', encoding='utf-8', newline='\n').write(src)
 print("Generated NSIS script: " + out_script)
 NSISP
 
-	if ! makensis "$NSIS_SCRIPT" > /dev/null; then
+	if ! makensis "$NSIS_SCRIPT"; then
 		echo "[错误] NSIS 打包失败！"
 		exit 1
 	fi
