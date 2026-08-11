@@ -162,10 +162,21 @@ if ! "$WINDEPLOYQT" --release --no-translations --no-system-d3d-compiler \
     --no-opengl-sw "$PVDIR/LogicAnalyzer.exe" \
     > "$PVDIR/windeployqt.log" 2>&1; then
     echo "[错误] windeployqt 部署 Qt5 失败，见 $PVDIR/windeployqt.log"
+    # 通过 ::error:: 输出日志，使错误信息出现在 CI annotations 中
+    while IFS= read -r line; do
+        echo "::error file=windeployqt.log::$line"
+    done < "$PVDIR/windeployqt.log"
     cat "$PVDIR/windeployqt.log" 2>/dev/null | tail -n 40
     exit 1
 fi
 echo "windeployqt 完成，插件目录: $(ls -d "$PVDIR"/platforms "$PVDIR"/imageformats "$PVDIR"/iconengines "$PVDIR"/styles 2>/dev/null | tr '\n' ' ')"
+if [ ! -f "$PVDIR/platforms/qwindows.dll" ] || [ ! -f "$PVDIR/Qt5Core.dll" ]; then
+    echo "[错误] windeployqt 未产出关键 Qt 运行库（platforms/qwindows.dll 或 Qt5Core.dll）"
+    while IFS= read -r line; do
+        echo "::error file=windeployqt.log::$line"
+    done < "$PVDIR/windeployqt.log"
+    exit 1
+fi
 
 cp -R "$PREFIX/share/libsigrokdecode/decoders" "$PVDIR/decoders"
 
