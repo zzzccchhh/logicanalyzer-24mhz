@@ -2,13 +2,19 @@
 ## This file is part of the U3LogicAnalyzer project.
 ##
 ## NSIS installer script for the U3LogicAnalyzer Windows build.
-## Generates a proper setup wizard (.exe) with start menu shortcuts
-## and uninstaller support.
 ##
-## NSIS documentation:
-## http://nsis.sourceforge.net/Docs/
-## http://nsis.sourceforge.net/Docs/Modern%20UI%202/Readme.html
+## IMPORTANT:
+##   - Keep this file pure ASCII (no UTF-8 / non-ANSI text) so makensis
+##     does not fail with "Bad text encoding".
+##   - Use RELATIVE paths only. NSIS 3.12 with "RequestExecutionLevel admin"
+##     mishandles absolute-path "File" directives ("no files found").
+##     makensis must be run from the build output directory (the directory
+##     that contains LogicAnalyzer.exe, the DLLs, run.bat, decoders/ and a
+##     copy of COPYING + icons/), so relative paths resolve correctly.
 ##
+
+# Unicode installer.
+Unicode true
 
 # Include the "Modern UI" header.
 !include "MUI2.nsh"
@@ -31,13 +37,10 @@ RequestExecutionLevel admin
 # Local helper definitions.
 !define REGSTR "Software\Microsoft\Windows\CurrentVersion\Uninstall\U3LogicAnalyzer"
 
-# Path where the built application files are located.
-!define APPDIR "@PVDIR@"
-
 # --- MUI interface configuration ---------------------------------------------
 
 # Use the following icon for the installer EXE file.
-!define MUI_ICON "@PROJECT_SOURCE_DIR@/icons/pulseview.ico"
+!define MUI_ICON "icons\pulseview.ico"
 
 # Show a nice image at the top of each installer page.
 !define MUI_HEADERIMAGE
@@ -58,7 +61,7 @@ RequestExecutionLevel admin
 !insertmacro MUI_PAGE_WELCOME
 
 # Show the license of the project.
-!insertmacro MUI_PAGE_LICENSE "@PROJECT_SOURCE_DIR@/COPYING"
+!insertmacro MUI_PAGE_LICENSE "COPYING"
 
 # Allow the user to select a different install directory.
 !insertmacro MUI_PAGE_DIRECTORY
@@ -83,8 +86,6 @@ RequestExecutionLevel admin
 
 # Installer languages.
 !insertmacro MUI_LANGUAGE "English"
-!insertmacro MUI_LANGUAGE "SimpChinese"
-!insertmacro MUI_LANGUAGE "TradChinese"
 
 # --- Default section ---------------------------------------------------------
 
@@ -96,19 +97,19 @@ Section "U3LogicAnalyzer (required)"
 	SetOutPath "$INSTDIR"
 
 	# License file.
-	File "@PROJECT_SOURCE_DIR@/COPYING"
+	File "COPYING"
 
 	# Main application.
-	File "${APPDIR}/LogicAnalyzer.exe"
+	File "LogicAnalyzer.exe"
 
 	# All runtime DLLs.
-	File "${APPDIR}/*.dll"
+	File "*.dll"
 
 	# run.bat launcher.
-	File "${APPDIR}/run.bat"
+	File "run.bat"
 
 	# Protocol decoders.
-	File /r "${APPDIR}/decoders"
+	File /r "decoders"
 
 	# Generate the uninstaller executable.
 	WriteUninstaller "$INSTDIR\Uninstall.exe"

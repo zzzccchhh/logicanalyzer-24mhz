@@ -184,21 +184,20 @@ if command -v makensis >/dev/null 2>&1; then
 	SETUP_NAME="LogicAnalyzer-setup-${PV_VERSION_STRING}.exe"
 	NSIS_SCRIPT="$PVDIR/logicanalyzer.nsi"
 
-	# 用 Python 生成 NSIS 脚本，避免 sed 在 Windows
-	# 反斜杠路径上的转义问题。路径统一转正斜杠。
-	python - "$SCRIPT_DIR" "$PVDIR" "$SETUP_NAME" "$PV_VERSION_STRING" "$NSIS_SCRIPT" <<'NSISP'
-import sys
-script_dir, pvdir, setup_name, ver, out_script = sys.argv[1:6]
-def fwd(p):
-    return p.replace('\\', '/')
-src = open(fwd(script_dir) + '/contrib/logicanalyzer.nsi.in', encoding='utf-8').read()
-src = src.replace('@OUTFILE@', setup_name)
-src = src.replace('@PVDIR@', fwd(pvdir))
-src = src.replace('@PROJECT_SOURCE_DIR@', fwd(script_dir))
-src = src.replace('@PV_VERSION_STRING@', ver)
-open(out_script, 'w', encoding='utf-8', newline='\n').write(src)
-print("Generated NSIS script: " + out_script)
-NSISP
+	# 生成 NSIS 脚本：仅替换版本号占位符。
+	# 重要：NSIS 3.12 在 RequestExecutionLevel admin 下对
+	# "绝对路径 File" 处理有 bug（报 no files found），
+	# 因此脚本全部使用相对路径，并在 $PVDIR
+	# 目录下运行 makensis（下面已 cd）。
+	sed -e "s|@OUTFILE@|${SETUP_NAME}|" \
+	    -e "s|@PV_VERSION_STRING@|${PV_VERSION_STRING}|g" \
+	    "$SCRIPT_DIR/contrib/logicanalyzer.nsi.in" > "$NSIS_SCRIPT"
+
+	# 将版权文件和图标复制到构建产物目录，
+	# 使 NSIS 的相对路径能解析到它们。
+	cp "$SCRIPT_DIR/COPYING" "$PVDIR/COPYING"
+	mkdir -p "$PVDIR/icons"
+	cp "$SCRIPT_DIR/icons/pulseview.ico" "$PVDIR/icons/"
 
 	if ! makensis "$NSIS_SCRIPT"; then
 		echo "[错误] NSIS 打包失败！"
